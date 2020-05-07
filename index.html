@@ -101,7 +101,7 @@
 			mqtt.send(message);
 			}
 		}
-		else  (prediction[2].probability.toFixed(2) > 0.95 ) {
+		else  if (prediction[2].probability.toFixed(2) > 0.95 ) {
 		    if(status != 3){
 			status = 3;
 			message = new Paho.MQTT.Message("3");
