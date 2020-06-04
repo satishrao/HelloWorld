@@ -48,10 +48,10 @@
 		if ( 'AmbientLightSensor' in window ) {
 			  const sensor = new AmbientLightSensor();
 			  sensor.onreading = () => {
-				document.getElementById("demo1").innerHTML =  sensor.illuminance);
+				document.getElementById("demo1").innerHTML =  sensor.illuminance;
 			  };
 			  sensor.onerror = (event) => {
-				document.getElementById("demo1").innerHTML =  event.error.message);
+				document.getElementById("demo1").innerHTML =  event.error.message;
 			  };
 			  sensor.start();
 			}
