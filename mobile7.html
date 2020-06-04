@@ -55,8 +55,8 @@ MQTTconnect();
 <h1> Device Orientation Example</h1> <br>
 <h1 id="demo"></h1>
 Gamma <h1 id="demo1"></h1><br>
-Alpha <h1 id="demo2"></h1><br>
-Beta <h1 id="demo3"></h1><br>
+Beta <h1 id="demo2"></h1><br>
+Alpha <h1 id="demo3"></h1><br>
 <script>
 document.getElementById("demo").innerHTML = random1;
 
@@ -68,7 +68,7 @@ if (window.DeviceOrientationEvent) {
 
         // beta is the front-to-back tilt in degrees
         console.log(eventData.beta);
-		document.getElementById("demo3").innerHTML = eventData.beta;
+		document.getElementById("demo2").innerHTML = eventData.beta;
 
         // alpha is the compass direction the device is facing in degrees
         console.log(eventData.alpha);
