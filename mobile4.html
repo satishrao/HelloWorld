@@ -19,7 +19,6 @@
 	
 			console.log("Connected ");
 			mqtt.subscribe("iotusersclub/"+random1);
-			mqtt.subscribe("iotusersclub/count");
 			message = new Paho.MQTT.Message("Hello World");
 			message.destinationName = "iotusersclub/count";
 			mqtt.send(message);
@@ -41,7 +40,7 @@
 		// called when a message arrives
 		function onMessageArrived(message) {
 			console.log("onMessageArrived:"+message.payloadString);
-			document.getElementById("demo1").innerHTML = message.payloadString;
+			
 			
 		}
 		
