@@ -31,12 +31,14 @@
 				onSuccess: onConnect,
 			
 			};
+			mqtt.connect(options); //connect
+		}
 		// called when a message arrives
 		function onMessageArrived(message) {
 			console.log("onMessageArrived:"+message.payloadString);
 		}
-			mqtt.connect(options); //connect
-		}
+			
+		
         
 MQTTconnect();
 </script>
