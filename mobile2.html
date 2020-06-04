@@ -9,6 +9,7 @@
 		var host="test.mosquitto.org"; //change this
 		var port=8081;
 		var random1 = Math.floor(Math.random() * 500) + 1;
+		console.log(random1);
 		document.getElementById("demo").innerHTML = random1;
 		function onConnect() {
 			// Once a connection has been made, make a subscription and send a message.
