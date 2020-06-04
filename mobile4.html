@@ -19,6 +19,7 @@
 	
 			console.log("Connected ");
 			mqtt.subscribe("iotusersclub/"+random1);
+			//mqtt.subscribe("iotusersclub/count");
 			message = new Paho.MQTT.Message("Hello World");
 			message.destinationName = "iotusersclub/count";
 			mqtt.send(message);
@@ -40,32 +41,43 @@
 		// called when a message arrives
 		function onMessageArrived(message) {
 			console.log("onMessageArrived:"+message.payloadString);
-			
+			//document.getElementById("demo1").innerHTML = message.payloadString;
 			
 		}
 		
-		if ( 'AmbientLightSensor' in window ) {
-			  const sensor = new AmbientLightSensor();
-			  sensor.onreading = () => {
-				document.getElementById("demo1").innerHTML =  sensor.illuminance;
-			  };
-			  sensor.onerror = (event) => {
-				document.getElementById("demo1").innerHTML =  event.error.message;
-			  };
-			  sensor.start();
-			}
-        
+		var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
+
+		function logBattery(battery) {
+			console.log(battery.level);
+			console.log(battery.charging);
+			document.getElementById("demo1").innerHTML = battery.level;
+			document.getElementById("demo2").innerHTML = battery.charging;
+
+			battery.addEventListener('chargingchange', function() {
+				console.log('Battery chargingchange event: ' + battery.charging);
+			}, false);
+		}
+
+		if (navigator.getBattery) {
+			navigator.getBattery().then(logBattery);
+		} else if (battery) {
+			logBattery(battery);
+		}
+		
+		
 MQTTconnect();
 </script>
 
 </head>
 <body>
 
-<h1> Ambient Light Example </h1> <br>
+<h1> Battery Status</h1> <br>
 <h1 id="demo"></h1>
-<h1 id="demo1"></h1><br>
+Battery Level <h1 id="demo1"></h1><br>
+Charging <h1 id="demo2"></h1>
 <script>
 document.getElementById("demo").innerHTML = random1;
 </script>
 </body>
 </html>
+
