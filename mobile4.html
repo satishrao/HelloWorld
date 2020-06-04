@@ -11,6 +11,7 @@
 		var reconnectTimeout = 2000;
 		var host="test.mosquitto.org"; //change this
 		var port=8081;
+		var count = 0;
 		var random1 = Math.floor(Math.random() * 500) + 1;
 		console.log(random1);
 		function onConnect() {
@@ -18,8 +19,9 @@
 	
 			console.log("Connected ");
 			mqtt.subscribe("iotusersclub/"+random1);
-			message = new Paho.MQTT.Message("Hello World"+random1);
-			message.destinationName = "iotusersclub";
+			mqtt.subscribe("iotusersclub/count");
+			message = new Paho.MQTT.Message("Hello World");
+			message.destinationName = "iotusersclub/count";
 			mqtt.send(message);
 			
 		}
@@ -40,19 +42,19 @@
 		function onMessageArrived(message) {
 			console.log("onMessageArrived:"+message.payloadString);
 			document.getElementById("demo1").innerHTML = message.payloadString;
+			
 		}
-		let gyroscope = new Gyroscope({frequency: 60});
-
-		gyroscope.addEventListener('reading', e => {
-				document.getElementById("demo1").innerHTML = gyroscope.x;
-				document.getElementById("demo2").innerHTML = gyroscope.y;
-				document.getElementById("demo3").innerHTML = gyroscope.z;
-		console.log("Angular velocity along the X-axis " + gyroscope.x);
-		console.log("Angular velocity along the Y-axis " + gyroscope.y);
-		console.log("Angular velocity along the Z-axis " + gyroscope.z);
-		});
-		gyroscope.start();
-
+		
+		if ( 'AmbientLightSensor' in window ) {
+			  const sensor = new AmbientLightSensor();
+			  sensor.onreading = () => {
+				document.getElementById("demo1").innerHTML =  sensor.illuminance);
+			  };
+			  sensor.onerror = (event) => {
+				document.getElementById("demo1").innerHTML =  event.error.message);
+			  };
+			  sensor.start();
+			}
         
 MQTTconnect();
 </script>
@@ -60,11 +62,9 @@ MQTTconnect();
 </head>
 <body>
 
-<h1> Gyroscope Example </h1> <br>
+<h1> Ambient Light Example </h1> <br>
 <h1 id="demo"></h1>
-<h1 id="demo1"></h1>
-<h1 id="demo2"></h1>
-<h1 id="demo3"></h1>
+<h1 id="demo1"></h1><br>
 <script>
 document.getElementById("demo").innerHTML = random1;
 </script>
