@@ -45,26 +45,6 @@
 			
 		}
 		
-		var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
-
-		function logBattery(battery) {
-			console.log(battery.level);
-			console.log(battery.charging);
-			document.getElementById("demo1").innerHTML = battery.level;
-			document.getElementById("demo2").innerHTML = battery.charging;
-
-			battery.addEventListener('chargingchange', function() {
-				console.log('Battery chargingchange event: ' + battery.charging);
-			}, false);
-		}
-
-		if (navigator.getBattery) {
-			navigator.getBattery().then(logBattery);
-		} else if (battery) {
-			logBattery(battery);
-		}
-		
-		
 MQTTconnect();
 </script>
 
