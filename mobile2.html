@@ -39,7 +39,8 @@
 		// called when a message arrives
 		function onMessageArrived(message) {
 			console.log("onMessageArrived:"+message.payloadString);
-			if(message.payloadString == "100") 
+			//if(message.payloadString == "100") 
+			document.getElementById("demo").innerHTML = message.payloadString;
 			   navigator.vibrate([2000, 500, 2000]);
 		}
 			
