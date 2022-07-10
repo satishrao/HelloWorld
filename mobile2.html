@@ -41,11 +41,19 @@
 			console.log("onMessageArrived:"+message.payloadString);
 			//if(message.payloadString == "100") 
 			document.getElementById("demo").innerHTML = message.payloadString;
-			   navigator.vibrate([2000, 500, 2000]);
+			   isMobile() && window.navigator.vibrate(200);
 		}
 			
         
 MQTTconnect();
+	
+const isMobile: () => {
+    const nav = navigator.userAgent.toLowerCase();
+    return (
+        nav.match(/iphone/i) || nav.match(/ipod/i) || nav.match(/ipad/i) || nav.match(/android/i)
+    );
+};
+
 </script>
 
 </head>
